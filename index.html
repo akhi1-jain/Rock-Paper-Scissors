@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors-Game</title>
+    <style>
+        /* Add CSS styles here */
+        .container-user-selection {
+            margin-top: 20px;
+        }
+        .container-user-selection button {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-<script src="script.js"></script>
+    <h1>Rock-Paper-Scissors Game</h1> <!-- Add a header for the game -->
+    <div class="container-calculation">
+        <p id="playerChoice">Player Choice: </p>
+        <p id="computerChoice">Computer Choice: </p>
+        <p id="result">Result: </p>
+    </div>
+    <div class="container-user-selection">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
