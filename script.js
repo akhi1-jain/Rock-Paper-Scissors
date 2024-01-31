@@ -4,6 +4,10 @@ const winningCombinations = {
   scissors: "paper",
 };
 
+let gameEnded = false; // Add a flag to track if the game has ended
+let playerScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   const randomNumber = Math.floor(Math.random() * 3);
@@ -22,6 +26,7 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game(playerSelection) {
+  if (!gameEnded) {
     const computerSelection = getComputerChoice();
     const roundResult = playRound(playerSelection, computerSelection);
 
@@ -30,9 +35,40 @@ function game(playerSelection) {
     document.getElementById("computerChoice").textContent =
       "Computer Choice: " + computerSelection;
     document.getElementById("result").textContent = "Result: " + roundResult;
+
+    updateScore(roundResult);
+  }
 }
 
-// Add event listener to the parent element of the buttons
+function updateScore(result) {
+  if (!gameEnded) {
+    if (result.includes("Win")) {
+      playerScore++;
+    } else if (result.includes("Lose")) {
+      computerScore++;
+    }
+
+    document.getElementById("playerScore").textContent =
+      "Player Score: " + playerScore;
+    document.getElementById("computerScore").textContent =
+      "Computer Score: " + computerScore;
+
+    if (playerScore === 5 || computerScore === 5) {
+      gameEnded = true;
+      announceWinner(playerScore, computerScore);
+    }
+  }
+}
+
+function announceWinner(playerScore, computerScore) {
+  const gameResultElement = document.getElementById("gameResult");
+  if (playerScore === 5) {
+    gameResultElement.textContent = "You win the game!";
+  } else {
+    gameResultElement.textContent = "Computer wins the game!";
+  }
+}
+
 const buttonsContainer = document.querySelector(".container-user-selection");
 buttonsContainer.addEventListener("click", function (event) {
   if (event.target.tagName === "BUTTON") {
